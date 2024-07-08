@@ -9,6 +9,8 @@ using TechTalk.SpecFlow.Assist;
 using SpecFlowBanking.ScreenObjects;
 using SpecFlowBanking.Utilities;
 using System.Collections;
+using AventStack.ExtentReports;
+
 //using NUnit.Framework;
 
 
@@ -18,7 +20,7 @@ namespace SpecFlowBanking.StepDefinitions
     [Binding]
     public sealed class BankingAppStepDefinition
     {
-
+        readonly static OneTimeIntialize? oneTimeInitialize = OneTimeIntialize.GetInstance();
         readonly TestContext? _testContext;
         // ConditionFactory cf = new ConditionFactory(new UIA3PropertyLibrary());
         readonly LoginWindow_SO? _objLogin;
@@ -34,8 +36,8 @@ namespace SpecFlowBanking.StepDefinitions
         [Given(@"Launch Banking Application")]
         public void GivenLaunchBankingApplication()
         {
-             _testContext!.ApplicationPath = @"C:\Users\jeevitha_j\Downloads\BankingApplication\BankingApplication\bin\Debug\BankingApplication";
-           // _testContext!.ApplicationPath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory + "../../../")!.FullName + "\\TestDataFiles\\customers-09.txt";
+           //  _testContext!.ApplicationPath = @"C:\Users\jeevitha_j\Downloads\BankingApplication\BankingApplication\bin\Debug\BankingApplication";
+            _testContext!.ApplicationPath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory + "../../../../")!.FullName + "\\BankingApplication\\BankingApplication\\bin\\Debug\\BankingApplication";
             LaunchOrAttach_Application(_testContext!.ApplicationPath, "BankingApplication");
            
         }
@@ -100,6 +102,7 @@ namespace SpecFlowBanking.StepDefinitions
             string? filePath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory + "../../../")!.FullName + "\\TestDataFiles\\customers-09.txt";
            // string filePath = "C:\\Users\\jeevitha_j\\Documents\\customers-09.txt";
             _dBFunctions!.ReadCSVDataIntoDataTable(filePath);
+           ExtentReports extent = oneTimeInitialize!.GetExtentReport();
         }
         
         [When(@"compare arraylist and list")]

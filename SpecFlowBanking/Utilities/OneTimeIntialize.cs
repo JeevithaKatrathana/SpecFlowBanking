@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics.Metrics;
 
 namespace SpecFlowBanking.Utilities
 {
@@ -13,9 +14,11 @@ namespace SpecFlowBanking.Utilities
     {
         ExtentReports? extent;
         private static readonly object lockobj = new  ();
+        private static int counter = 0;
         private OneTimeIntialize() //parameterless constructor
         {
-           
+            counter++;
+            Console.WriteLine("Counter value :" + counter);
         }
        
     private static OneTimeIntialize? instance = null;
