@@ -120,9 +120,6 @@ this.ScenarioInitialize(scenarioInfo);
 #line 11
  testRunner.When("User Enters Valid UserName ,Password and clicks Login button", ((string)(null)), table1, "When ");
 #line hidden
-#line 14
- testRunner.Then("User is on the HomePage", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
             }
             this.ScenarioCleanup();
         }

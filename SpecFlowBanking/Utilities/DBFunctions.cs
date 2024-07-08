@@ -15,14 +15,14 @@ namespace SpecFlowBanking.Utilities
 {
     public class DBFunctions
     {
-        public void ReadCSVDataIntoDataTable(string csvFileName)
+        public  void  ReadCSVDataIntoDataTable(string csvFileName)
         {
             string filePath = csvFileName;
             string[]? headers;
             string? Firstline, line;
            
-            ArrayList My_arraylist = new ArrayList();
-            using (StreamReader sr = new StreamReader(filePath))
+            ArrayList My_arraylist = new ();
+            using (StreamReader sr = new (filePath))
             {
                
                 Firstline = sr.ReadLine();

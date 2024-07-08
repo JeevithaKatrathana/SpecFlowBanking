@@ -11,4 +11,4 @@ Scenario: Login to Banking Application
 	When User Enters Valid UserName ,Password and clicks Login button
 	| testdataName | UserName | Password |  
 	| data1        | admin   | admin   |
-	Then User is on the HomePage
+	

@@ -11,8 +11,8 @@ namespace SpecFlowBanking.FunctionLibraries
 {
     public class FlaBaseUI
     {
-        public ConditionFactory cf = new ConditionFactory(new UIA3PropertyLibrary());
-        public FlaBaseUI() 
+        public ConditionFactory cf = new (new UIA3PropertyLibrary());
+        public FlaBaseUI()
         { 
         }
     }

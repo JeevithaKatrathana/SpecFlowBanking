@@ -180,7 +180,7 @@ this.ScenarioInitialize(scenarioInfo);
 testRunner.Given("A arraylist and a list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 17
-testRunner.When("compare arraylist and list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("compare arraylist and list", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             }
             this.ScenarioCleanup();

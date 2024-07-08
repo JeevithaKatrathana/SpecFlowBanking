@@ -12,9 +12,9 @@ namespace SpecFlowBanking.ScreenObjects
     [Binding]
     public class LoginWindow_SO : FlaBaseUI
     {
-       
-        TestContext? _testContext;
-        Window? _PreviosWindow;
+
+        readonly TestContext? _testContext;
+        readonly Window? _PreviosWindow;
        // public FlaUI.Core.AutomationElements.AutomationElement? TxtUserName, txtPassword, btnLogin;
 
         public LoginWindow_SO(TestContext testContext)
@@ -27,34 +27,36 @@ namespace SpecFlowBanking.ScreenObjects
         #region getter setter
         public FlaUI.Core.AutomationElements.AutomationElement? TxtUserName
         {
-            set { }
-            get { return getUserNameElement(); }
+           
+            get { return GetUserNameElement(); }
         }
         public FlaUI.Core.AutomationElements.AutomationElement? TxtPassword
         {
-            set { }
-            get { return getPasswordElement(); }
+            get { return GetPasswordElement(); }
         }
+          
+        
         public FlaUI.Core.AutomationElements.AutomationElement? BtnLogin
         {
-            set {  }
-            get { return getLoginButton();  }
+           
+            get { return GetLoginButton();  }
         }
+        
         #endregion
 
-        public FlaUI.Core.AutomationElements.AutomationElement? getUserNameElement()
+        public FlaUI.Core.AutomationElements.AutomationElement? GetUserNameElement()
         {
            return  _testContext!.MainWindow!.FindFirstChild(cf.ByAutomationId("usrtxt")).AsTextBox(); 
         }
-        public FlaUI.Core.AutomationElements.AutomationElement? getPasswordElement()
+        public FlaUI.Core.AutomationElements.AutomationElement? GetPasswordElement()
         {
            return  _testContext!.MainWindow!.FindFirstChild(cf.ByAutomationId("passtxt")).AsTextBox();
         }
-        public FlaUI.Core.AutomationElements.AutomationElement? getLoginButton()
+        public FlaUI.Core.AutomationElements.AutomationElement? GetLoginButton()
         {
            return _testContext!.MainWindow!.FindFirstChild(cf.ByName("Login")).AsTextBox();
         }
-        public void setContextToMainWindow()
+        public void SetContextToMainWindow()
         {
             _testContext!.MainWindow = _PreviosWindow;
         }

@@ -9,6 +9,7 @@ using TechTalk.SpecFlow.Assist;
 using SpecFlowBanking.ScreenObjects;
 using SpecFlowBanking.Utilities;
 using System.Collections;
+//using NUnit.Framework;
 
 
 
@@ -18,10 +19,10 @@ namespace SpecFlowBanking.StepDefinitions
     public sealed class BankingAppStepDefinition
     {
 
-        TestContext? _testContext;
-        ConditionFactory cf = new ConditionFactory(new UIA3PropertyLibrary());
-        LoginWindow_SO? _objLogin;
-        DBFunctions? _dBFunctions;
+        readonly TestContext? _testContext;
+        // ConditionFactory cf = new ConditionFactory(new UIA3PropertyLibrary());
+        readonly LoginWindow_SO? _objLogin;
+       readonly DBFunctions?  _dBFunctions;
         public BankingAppStepDefinition(TestContext testContext, LoginWindow_SO objLogin, DBFunctions dBFunctions)
         {
             _testContext = testContext;
@@ -33,7 +34,8 @@ namespace SpecFlowBanking.StepDefinitions
         [Given(@"Launch Banking Application")]
         public void GivenLaunchBankingApplication()
         {
-            _testContext!.ApplicationPath = @"C:\Users\jeevitha_j\Downloads\BankingApplication\BankingApplication\bin\Debug\BankingApplication";
+             _testContext!.ApplicationPath = @"C:\Users\jeevitha_j\Downloads\BankingApplication\BankingApplication\bin\Debug\BankingApplication";
+           // _testContext!.ApplicationPath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory + "../../../")!.FullName + "\\TestDataFiles\\customers-09.txt";
             LaunchOrAttach_Application(_testContext!.ApplicationPath, "BankingApplication");
            
         }
@@ -66,17 +68,20 @@ namespace SpecFlowBanking.StepDefinitions
             /*_objLogin!.getUserNameElement();
             _objLogin!.getPasswordElement();
              _objLogin.getLoginButton();*/
-
+           
             foreach (var item in tablecontent)
             {
                 // item.UserName;
                 _objLogin!.TxtUserName.AsTextBox().Enter(item.UserName);
+                NUnit.Framework.Assert.AreEqual(item.UserName, _objLogin!.TxtUserName.AsTextBox().Text, " User name not entered as expected");
+               
                 _objLogin!.TxtPassword.AsTextBox().Enter(item.Password);
+               
                 _objLogin!.BtnLogin.AsButton().Click();
                             
             }
 
-           }
+        }
         public record TestdataTable //using record type .
         {
             public string? UserName { set; get; }
@@ -86,44 +91,19 @@ namespace SpecFlowBanking.StepDefinitions
 
         }
         
-        [Then(@"User is on the HomePage")]
-        public void ThenUserIsOnTheHomePage()
-        {
-           
-        }
+       
 
-        [Given(@"Find a CSV file")]
-        public void GivenFindACSVFile()
-        {
-            Console.WriteLine("not ready");
-        }
 
         [When(@"Read Data from CSV to arraylist")]
         public void WhenReadDataFromCSVToArraylist()
         {
-            string filePath = "C:\\Users\\jeevitha_j\\Documents\\customers-09.txt";
+            string? filePath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory + "../../../")!.FullName + "\\TestDataFiles\\customers-09.txt";
+           // string filePath = "C:\\Users\\jeevitha_j\\Documents\\customers-09.txt";
             _dBFunctions!.ReadCSVDataIntoDataTable(filePath);
         }
-        [Given(@"Find a txt file")]
-        public void GivenFindATxtFile()
-        {
-           
-        }
-
-        [When(@"Read Data from txt")]
-        public void WhenReadDataFromTxt()
-        {
-          
-        }
-
-        [Given(@"A arraylist and a list")]
-        public void GivenAArraylistAndAList()
-        {
-           
-        }
-
+        
         [When(@"compare arraylist and list")]
-        public void WhenCompareArraylistAndList()
+        public static void WhenCompareArraylistAndList()
         {
             //both are dynamically sized
             var arraylist = new ArrayList(); //not type specific
@@ -138,29 +118,54 @@ namespace SpecFlowBanking.StepDefinitions
 
             //display elements : no difference
             Console.WriteLine("arraylist after adding 2 elements");
-            displayArraylistElements(arraylist);
+            DisplayArraylistElements(arraylist);
             Console.WriteLine("List after adding 2 elements");
-            displayListElements(list);
+            DisplayListElements(list);
 
             //remove elements : removes first occurance if 1
             arraylist.Remove(1);
             list.Remove(1);
             Console.WriteLine("arraylist after removing item with value 1");
-            displayArraylistElements(arraylist);
+            DisplayArraylistElements(arraylist);
             Console.WriteLine("list after removing item with value 1");
-            displayListElements(list);
+            DisplayListElements(list);
 
 
         }
-        public void displayArraylistElements(ArrayList arraylist)
+        public static void DisplayArraylistElements(ArrayList arraylist)
         {
             foreach (var item in arraylist)
                 Console.WriteLine(item);
         }
-        public void displayListElements(List<int> list)
+        public static  void DisplayListElements(List<int> list)
         {
             foreach (var item in list)
                 Console.WriteLine(item);
         }
+
+        [Given(@"Find a CSV file")]
+        public void GivenFindACSVFile()
+        {
+            Console.WriteLine("GivenFindACSVFile");
+        }
+
+        [Given(@"Find a txt file")]
+        public void GivenFindATxtFile()
+        {
+            Console.WriteLine("GivenFindATxtFile");
+        }
+
+        [When(@"Read Data from txt")]
+        public void WhenReadDataFromTxt()
+        {
+            Console.WriteLine("WhenReadDataFromTxt");
+        }
+
+        [Given(@"A arraylist and a list")]
+        public void GivenAArraylistAndAList()
+        {
+            Console.WriteLine("GivenAArraylistAndAList");
+        }
+
     }
 }

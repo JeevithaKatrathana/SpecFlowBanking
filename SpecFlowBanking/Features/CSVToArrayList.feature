@@ -14,4 +14,4 @@ Scenario:Read test data from text file
 
 Scenario: difference between Arraylist and List
 Given A arraylist and a list
-When compare arraylist and list
+	When compare arraylist and list
